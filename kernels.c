@@ -42,10 +42,11 @@ void validateLayer(float * Y_out, float *reference, uint32_t out)
 }
 
 float cost_func(float * Y_out, float * Y_ex, uint32_t out){
-    uint32_t i;
-    float cost = 0.0;
-    for(i=0; i<out; i++){
-        cost += (Y_out[i]-Y_ex[i])*(Y_out[i]-Y_ex[i]);
+    uint32_t j;
+    float cost = 0.0, distance = 0.0;
+    for(j=0; j<out; j++){
+        distance = Y_out[j]-Y_ex[j];
+        cost += distance * distance;
     }
     return cost/(float)out;
 }

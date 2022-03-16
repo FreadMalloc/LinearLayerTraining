@@ -1,0 +1,47 @@
+[0] total cycles = 8877382
+[0] instructions = 5846808
+[0] active cycles = 8877381
+[0] external loads (L2+synch) = 78272
+[0] TCDM cont = 0
+[0] LD stalls = 1982
+[0] I$ misses = 22059
+
+[0] total cycles = 8866217
+[0] instructions = 5829854
+[0] active cycles = 8866216
+[0] external loads (L2+synch) = 78286
+[0] TCDM cont = 0
+[0] LD stalls = 1982
+[0] I$ misses = 22572
+
+[0] total cycles = 8883694
+[0] instructions = 5845841
+[0] active cycles = 8883693
+[0] external loads (L2+synch) = 78312
+[0] TCDM cont = 0
+[0] LD stalls = 2022
+[0] I$ misses = 22572
+
+[0] total cycles = 8883649
+[0] instructions = 5853616
+[0] active cycles = 8883648
+[0] external loads (L2+synch) = 78249
+[0] TCDM cont = 0
+[0] LD stalls = 1952
+[0] I$ misses = 22553
+
+[0] total cycles = 8868183
+[0] instructions = 5836366
+[0] active cycles = 8868182
+[0] external loads (L2+synch) = 78205
+[0] TCDM cont = 0
+[0] LD stalls = 1900
+[0] I$ misses = 21109
+
+[0] total cycles = 8883155
+[0] instructions = 5843164
+[0] active cycles = 8883154
+[0] external loads (L2+synch) = 78194
+[0] TCDM cont = 0
+[0] LD stalls = 1886
+[0] I$ misses = 21698

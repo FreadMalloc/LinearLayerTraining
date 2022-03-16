@@ -24,16 +24,16 @@ Idx Name          Size      VMA       LMA       File off  Algn  Flags
  18 .l1cluster_g  00000004  1000001c  1c00deb0  0001101c  2**2  CONTENTS, ALLOC, LOAD, DATA
  19 .bss_l1       00000000  10000020  10000020  00011020  2**0  CONTENTS
  20 .debug_frame  000041e4  00000000  00000000  00011020  2**2  CONTENTS, READONLY, DEBUGGING
- 21 .debug_info   00059c27  00000000  00000000  00015204  2**0  CONTENTS, READONLY, DEBUGGING
- 22 .debug_abbrev 0000a13a  00000000  00000000  0006ee2b  2**0  CONTENTS, READONLY, DEBUGGING
- 23 .debug_loc    00017e2a  00000000  00000000  00078f65  2**0  CONTENTS, READONLY, DEBUGGING
- 24 .debug_aranges 00001120  00000000  00000000  00090d90  2**3  CONTENTS, READONLY, DEBUGGING
- 25 .debug_ranges 000035f0  00000000  00000000  00091eb0  2**3  CONTENTS, READONLY, DEBUGGING
- 26 .debug_macro  0000dda8  00000000  00000000  000954a0  2**0  CONTENTS, READONLY, DEBUGGING
- 27 .debug_line   0002107e  00000000  00000000  000a3248  2**0  CONTENTS, READONLY, DEBUGGING
- 28 .debug_str    00077d4d  00000000  00000000  000c42c6  2**0  CONTENTS, READONLY, DEBUGGING
- 29 .comment      0000001a  00000000  00000000  0013c013  2**0  CONTENTS, READONLY
- 30 .Pulp_Chip.Info 0000004e  00000000  00000000  0013c02d  2**0  CONTENTS, READONLY
+ 21 .debug_info   00059c36  00000000  00000000  00015204  2**0  CONTENTS, READONLY, DEBUGGING
+ 22 .debug_abbrev 0000a13a  00000000  00000000  0006ee3a  2**0  CONTENTS, READONLY, DEBUGGING
+ 23 .debug_loc    00017e5d  00000000  00000000  00078f74  2**0  CONTENTS, READONLY, DEBUGGING
+ 24 .debug_aranges 00001120  00000000  00000000  00090dd8  2**3  CONTENTS, READONLY, DEBUGGING
+ 25 .debug_ranges 000035f0  00000000  00000000  00091ef8  2**3  CONTENTS, READONLY, DEBUGGING
+ 26 .debug_macro  0000dda8  00000000  00000000  000954e8  2**0  CONTENTS, READONLY, DEBUGGING
+ 27 .debug_line   00021088  00000000  00000000  000a3290  2**0  CONTENTS, READONLY, DEBUGGING
+ 28 .debug_str    00077d57  00000000  00000000  000c4318  2**0  CONTENTS, READONLY, DEBUGGING
+ 29 .comment      0000001a  00000000  00000000  0013c06f  2**0  CONTENTS, READONLY
+ 30 .Pulp_Chip.Info 0000004e  00000000  00000000  0013c089  2**0  CONTENTS, READONLY
 SYMBOL TABLE:
 00000004 l    d  .data_tiny_fc	00000000 .data_tiny_fc
 1b000398 l    d  .stack	00000000 .stack
@@ -4103,7 +4103,7 @@ static inline void timer_cfg_lo_set(uint32_t base, uint32_t value) { ARCHI_WRITE
 1c001bb6:	bdf1                	j	1c001a92 <cluster_fn+0x152>
 
 1c001bb8 <forewardProp>:
-#include "pmsis.h"
+////////////////////////////////////////// SINGLE CORE ///////////////////////////////////////////////////
 
 void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, uint32_t in, uint32_t out){
     uint32_t i, j;
@@ -4262,7 +4262,6 @@ void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, ui
         printf("!!!!!!!!!!!!! VALIDATION TEST FAILED, THE MODEL IS NOT INITIALIZED CORRECTLY !!!!!!!!!!!!!!\n");
         printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
-
 }
 1c001ccc:	50b2                	lw	ra,44(sp)
 1c001cce:	5422                	lw	s0,40(sp)
@@ -4311,27 +4310,28 @@ float cost_func(float * Y_out, float * Y_ex, uint32_t out){
 1c001d22:	c84a                	sw	s2,16(sp)
 1c001d24:	c64e                	sw	s3,12(sp)
 1c001d26:	8a32                	mv	s4,a2
-    uint32_t i;
-    float cost = 0.0;
-    for(i=0; i<out; i++){
+    uint32_t j;
+    float cost = 0.0, distance = 0.0;
+    for(j=0; j<out; j++){
 1c001d28:	c631                	beqz	a2,1c001d74 <cost_func+0x5c>
 1c001d2a:	00261993          	slli	s3,a2,0x2
 1c001d2e:	842a                	mv	s0,a0
 1c001d30:	84ae                	mv	s1,a1
 1c001d32:	99aa                	add	s3,s3,a0
-    float cost = 0.0;
+    float cost = 0.0, distance = 0.0;
 1c001d34:	00000913          	li	s2,0
-        cost += (Y_out[i]-Y_ex[i])*(Y_out[i]-Y_ex[i]);
+        distance = Y_out[j]-Y_ex[j];
 1c001d38:	0044a58b          	p.lw	a1,4(s1!)
 1c001d3c:	0044250b          	p.lw	a0,4(s0!)
 1c001d40:	f36ff0ef          	jal	ra,1c001476 <__subsf3>
+        cost += distance * distance;
 1c001d44:	85aa                	mv	a1,a0
 1c001d46:	d44ff0ef          	jal	ra,1c00128a <__mulsf3>
 1c001d4a:	85aa                	mv	a1,a0
 1c001d4c:	854a                	mv	a0,s2
 1c001d4e:	f4dfe0ef          	jal	ra,1c000c9a <__addsf3>
 1c001d52:	892a                	mv	s2,a0
-    for(i=0; i<out; i++){
+    for(j=0; j<out; j++){
 1c001d54:	fe8992e3          	bne	s3,s0,1c001d38 <cost_func+0x20>
     }
     return cost/(float)out;
@@ -4349,7 +4349,7 @@ float cost_func(float * Y_out, float * Y_ex, uint32_t out){
 1c001d6e:	4a22                	lw	s4,8(sp)
 1c001d70:	6105                	addi	sp,sp,32
 1c001d72:	8082                	ret
-    float cost = 0.0;
+    float cost = 0.0, distance = 0.0;
 1c001d74:	00000913          	li	s2,0
 1c001d78:	b7c5                	j	1c001d58 <cost_func+0x40>
 

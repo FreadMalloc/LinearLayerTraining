@@ -9,28 +9,28 @@ riscv32-unknown-elf-nm -a -A -l -S --size-sort --special-syms /home/pulp-bruno/w
 gapy --target=gapuino_v3 --platform=gvsoc --work-dir=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV    run --image --binary=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul 
 gapy --target=gapuino_v3 --platform=gvsoc --work-dir=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV    run --flash --binary=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul 
 gapy --target=gapuino_v3 --platform=gvsoc --work-dir=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV    run --exec-prepare --exec --binary=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul 
--224.020203
-1107.838013
--680.086121
-1204.948242
-cost: 797423.187500
--133.230988
-659.268982
--404.464630
-716.617249
-new cost: 282050.125000
-     change: 515373.062500
-cost: 282050.125000
--79.235611
-392.489746
--240.546646
-426.192993
-new cost: 99761.414063
-     change: 182288.718750
-[0] total cycles = 8868099
-[0] instructions = 5840007
-[0] active cycles = 8868098
-[0] external loads (L2+synch) = 78264
+-213.741776
+791.493835
+393.816284
+115.280426
+cost: 209736.718750
+-127.075813
+470.971741
+234.135910
+68.537857
+new cost: 74134.687500
+     change: 135602.031250
+cost: 74134.687500
+-75.550255
+280.412964
+139.201340
+40.747684
+new cost: 26204.208984
+     change: 47930.476563
+[0] total cycles = 8883155
+[0] instructions = 5843164
+[0] active cycles = 8883154
+[0] external loads (L2+synch) = 78194
 [0] TCDM cont = 0
-[0] LD stalls = 2002
-[0] I$ misses = 21679
+[0] LD stalls = 1886
+[0] I$ misses = 21698
