@@ -1,0 +1,36 @@
+riscv32-unknown-elf-gcc -DPERF -DDEBUG -O3 -g3 -DNUM_CORES=1 -DCONFIG_GAPUINO -DRT_FC_STACK_SIZE=2048 -D__PLATFORM_GVSOC__ -fno-jump-tables -fno-tree-loop-distribute-patterns -fdata-sections -ffunction-sections -mchip=gap8 -mPE=8 -mFC=1 -D__riscv__ -D__GAP__ -D__GAP8__ -DCHIP_VERSION=3 -mnativeomp -D__pulp__ -DCONFIG_GAP -D__PULP_OS__ -MMD -MP -c main.c  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include/io  -I/home/pulp-bruno/gap_sdk/install/workstation/include  -I/home/pulp-bruno/gap_sdk/tools/autotiler_v3/Emulation  -include /home/pulp-bruno/gap_sdk/install/GAP8_V3/include/rt/chips/gap8_revc/config.h -MD -MF /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/main.d -o /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/main.o
+riscv32-unknown-elf-gcc -DPERF -DDEBUG -O3 -g3 -DNUM_CORES=1 -DCONFIG_GAPUINO -DRT_FC_STACK_SIZE=2048 -D__PLATFORM_GVSOC__ -fno-jump-tables -fno-tree-loop-distribute-patterns -fdata-sections -ffunction-sections -mchip=gap8 -mPE=8 -mFC=1 -D__riscv__ -D__GAP__ -D__GAP8__ -DCHIP_VERSION=3 -mnativeomp -D__pulp__ -DCONFIG_GAP -D__PULP_OS__ -MMD -MP -c cluster.c  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include/io  -I/home/pulp-bruno/gap_sdk/install/workstation/include  -I/home/pulp-bruno/gap_sdk/tools/autotiler_v3/Emulation  -include /home/pulp-bruno/gap_sdk/install/GAP8_V3/include/rt/chips/gap8_revc/config.h -MD -MF /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/cluster.d -o /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/cluster.o
+riscv32-unknown-elf-gcc -DPERF -DDEBUG -O3 -g3 -DNUM_CORES=1 -DCONFIG_GAPUINO -DRT_FC_STACK_SIZE=2048 -D__PLATFORM_GVSOC__ -fno-jump-tables -fno-tree-loop-distribute-patterns -fdata-sections -ffunction-sections -mchip=gap8 -mPE=8 -mFC=1 -D__riscv__ -D__GAP__ -D__GAP8__ -DCHIP_VERSION=3 -mnativeomp -D__pulp__ -DCONFIG_GAP -D__PULP_OS__ -MMD -MP -c kernels.c  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include/io  -I/home/pulp-bruno/gap_sdk/install/workstation/include  -I/home/pulp-bruno/gap_sdk/tools/autotiler_v3/Emulation  -include /home/pulp-bruno/gap_sdk/install/GAP8_V3/include/rt/chips/gap8_revc/config.h -MD -MF /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/kernels.d -o /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/kernels.o
+riscv32-unknown-elf-gcc -DPERF -DDEBUG -O3 -g3 -DNUM_CORES=1 -DCONFIG_GAPUINO -DRT_FC_STACK_SIZE=2048 -D__PLATFORM_GVSOC__ -fno-jump-tables -fno-tree-loop-distribute-patterns -fdata-sections -ffunction-sections -mchip=gap8 -mPE=8 -mFC=1 -D__riscv__ -D__GAP__ -D__GAP8__ -DCHIP_VERSION=3 -mnativeomp -D__pulp__ -DCONFIG_GAP -D__PULP_OS__ -MMD -MP -c /home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/conf.c  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include/io  -I/home/pulp-bruno/gap_sdk/install/workstation/include  -I/home/pulp-bruno/gap_sdk/tools/autotiler_v3/Emulation  -include /home/pulp-bruno/gap_sdk/install/GAP8_V3/include/rt/chips/gap8_revc/config.h -MD -MF /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/pulp-os/conf.d -o /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/pulp-os/conf.o
+riscv32-unknown-elf-gcc -march=rv32imcxgap8 -mPE=8 -mFC=1 -MMD -MP -Wl,--gc-sections   -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include  -I/home/pulp-bruno/gap_sdk/install/GAP8_V3/include/io  -I/home/pulp-bruno/gap_sdk/install/workstation/include  -I/home/pulp-bruno/gap_sdk/tools/autotiler_v3/Emulation  -include /home/pulp-bruno/gap_sdk/install/GAP8_V3/include/rt/chips/gap8_revc/config.h -o /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul  /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/main.o  /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/cluster.o  /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/kernels.o /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/pulp-os/conf.o   -L/home/pulp-bruno/gap_sdk/install/GAP8_V3/lib/gap/gapuino -lpibsp -L/home/pulp-bruno/gap_sdk/install/GAP8_V3/lib/gap -lrt -lrtio -lrt -lgcc -T/home/pulp-bruno/gap_sdk/install/workstation/ld/link.gap8_rev2.ld -T/home/pulp-bruno/gap_sdk/install/workstation/ld/gvsoc.conf.ld  -nostartfiles -nostdlib -include /home/pulp-bruno/gap_sdk/install/GAP8_V3/include/rt/chips/gap8_revc/config.h
+riscv32-unknown-elf-objdump -d -h -S -t -w --show-raw-insn /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul > /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul.s
+riscv32-unknown-elf-size -B -x --common /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul > /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul.size
+riscv32-unknown-elf-nm -a -A -l -S --size-sort --special-syms /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul >> /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul.size
+gapy --target=gapuino_v3 --platform=gvsoc --work-dir=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV    run --image --binary=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul 
+gapy --target=gapuino_v3 --platform=gvsoc --work-dir=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV    run --flash --binary=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul 
+gapy --target=gapuino_v3 --platform=gvsoc --work-dir=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV    run --exec-prepare --exec --binary=/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul 
+-224.020203
+1107.838013
+-680.086121
+1204.948242
+cost: 797423.187500
+-133.230988
+659.268982
+-404.464630
+716.617249
+new cost: 282050.125000
+     change: 515373.062500
+cost: 282050.125000
+-79.235611
+392.489746
+-240.546646
+426.192993
+new cost: 99761.414063
+     change: 182288.718750
+[0] total cycles = 8868099
+[0] instructions = 5840007
+[0] active cycles = 8868098
+[0] external loads (L2+synch) = 78264
+[0] TCDM cont = 0
+[0] LD stalls = 2002
+[0] I$ misses = 21679
