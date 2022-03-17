@@ -72,8 +72,8 @@ void backpropagation(uint8_t * X_in,
     }
 
     // NOW WEIGHTS
-    for(j=0; j< out; j++){
-        for(i=0; i< in; i++){
+    for(i=0; i< in; i++){
+        for(j=0; j< out; j++){
             index = j*in + i;
             //float a = W_wg[index];   //to print
             
