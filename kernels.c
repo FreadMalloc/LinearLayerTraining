@@ -40,7 +40,7 @@ void validateLayer(float * Y_out, float *reference, uint32_t out)
         printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
 }
-
+ 
 float cost_func(float * Y_out, float * Y_ex, uint32_t out){
     uint32_t j;
     float cost = 0.0, distance = 0.0;
@@ -75,7 +75,7 @@ void backpropagation(uint8_t * X_in,
     for(j=0; j< out; j++){
         for(i=0; i< in; i++){
             index = j*in + i;
-            float a = W_wg[index];   //to print
+            //float a = W_wg[index];   //to print
             
             W_wg[index] = W_wg[index] - lr * gradient[j] * (float)X_in[i];    // new weight = old - learning rate * (output - ideal output) * input
             

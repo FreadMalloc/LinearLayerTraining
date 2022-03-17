@@ -22,19 +22,9 @@ float learningRate = 0.00000001;
   float cost_func(float * Y_out, float * Y_ex, uint32_t out);
   void backpropagation(uint8_t * X_in, float * Y_out, float * Y_ex, float * W_wg, float * B_bs, uint32_t in, uint32_t out, float lr);
 #else
-  //void vectAddPar(int * pSrcA, int  * pSrcB, int * pDstC, int n);
-  //void vectAddParBalanced(int * pSrcA, int  * pSrcB, int * pDstC, int n);
+  //  put here the multicore funcion definitions
 #endif
 
-/*
-void vect_init(int * A, int * B, int * C, int size) {
-  for (int i = 0; i < size; i++) {
-    A[i] = i;
-    B[i] = i+2;
-    C[i] = 0;
-  }
-}
-*/
 
 
 void cluster_fn() {
