@@ -195,7 +195,7 @@
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c005350 0000005c T __rt_uart_init	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:292
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c002d90 0000005e T __rt_periph_init	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/periph-v2.c:276
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c004242 0000005e T __rt_putc_debug_bridge	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:288
-/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001db8 00000062 T cost_func	/home/pulp-bruno/work/linear_layer_training/kernels.c:70
+/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001db8 00000062 T cost_func	/home/pulp-bruno/work/linear_layer_training/kernels.c:52
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c00329c 00000062 t __rt_init_cluster_data	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:72
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c0032fe 00000064 t __rt_cluster_init	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:382
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c002774 00000064 T __rt_event_execute	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:189
@@ -231,7 +231,7 @@
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c003032 000000a2 T InitOneFll	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:771
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c0042d8 000000a8 t tfp_putc.isra.9	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:795
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c0031d6 000000ac T __rt_pmu_init	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:472
-/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001d02 000000b6 T validateLayer	/home/pulp-bruno/work/linear_layer_training/kernels.c:47
+/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001d02 000000b6 T validateLayer	/home/pulp-bruno/work/linear_layer_training/kernels.c:33
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c005c08 000000c0 D __hal_debug_struct
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c0030d4 000000c2 T __rt_pmu_cluster_power_up
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c004098 000000ce t __rt_io_uart_flush.constprop.11	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:795
@@ -242,12 +242,12 @@
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c00567c 00000100 R __clz_tab
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c003362 00000124 t __rt_cluster_mount_step	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:221
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c002c08 00000132 T rt_periph_copy	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/periph-v2.c:58
-/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001e1a 00000148 T backpropagation	/home/pulp-bruno/work/linear_layer_training/kernels.c:80
-/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001bb8 0000014a T forewardProp	/home/pulp-bruno/work/linear_layer_training/kernels.c:5
+/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001e1a 00000148 T backpropagation	/home/pulp-bruno/work/linear_layer_training/kernels.c:62
+/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001bb8 0000014a T forewardProp
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001f88 00000166 T __rt_init	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:74
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c00128a 000001ec T __mulsf3	/home/yao/tools/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/mulsf3.c:35
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c000f84 000001fe T __divsf3	/home/yao/tools/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/divsf3.c:35
-/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001940 00000278 T cluster_fn	/home/pulp-bruno/work/linear_layer_training/cluster.c:30
+/home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c001940 00000278 T cluster_fn	/home/pulp-bruno/work/linear_layer_training/cluster.c:33
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:00000030 00000280 D periph_channels
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c0039f6 00000282 t __pi_hyper_copy_misaligned	/home/pulp-bruno/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:806
 /home/pulp-bruno/work/linear_layer_training/BUILD/GAP8_V3/GCC_RISCV/matrixMul:1c000c9a 000002ea T __addsf3	/home/yao/tools/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/addsf3.c:35

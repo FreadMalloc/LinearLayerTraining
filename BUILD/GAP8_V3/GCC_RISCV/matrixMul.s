@@ -23,17 +23,17 @@ Idx Name          Size      VMA       LMA       File off  Algn  Flags
  17 .data_tiny_l1 00000018  00000004  1c00dfa8  00011004  2**2  CONTENTS, ALLOC, LOAD, DATA
  18 .l1cluster_g  00000004  1000001c  1c00dfc0  0001101c  2**2  CONTENTS, ALLOC, LOAD, DATA
  19 .bss_l1       00000000  10000020  10000020  00011020  2**0  CONTENTS
- 20 .debug_frame  000041e8  00000000  00000000  00011020  2**2  CONTENTS, READONLY, DEBUGGING
- 21 .debug_info   00059c80  00000000  00000000  00015208  2**0  CONTENTS, READONLY, DEBUGGING
- 22 .debug_abbrev 0000a131  00000000  00000000  0006ee88  2**0  CONTENTS, READONLY, DEBUGGING
- 23 .debug_loc    00017fd5  00000000  00000000  00078fb9  2**0  CONTENTS, READONLY, DEBUGGING
- 24 .debug_aranges 00001120  00000000  00000000  00090f90  2**3  CONTENTS, READONLY, DEBUGGING
- 25 .debug_ranges 000035f0  00000000  00000000  000920b0  2**3  CONTENTS, READONLY, DEBUGGING
- 26 .debug_macro  0000dda8  00000000  00000000  000956a0  2**0  CONTENTS, READONLY, DEBUGGING
- 27 .debug_line   0002118c  00000000  00000000  000a3448  2**0  CONTENTS, READONLY, DEBUGGING
- 28 .debug_str    00077eda  00000000  00000000  000c45d4  2**0  CONTENTS, READONLY, DEBUGGING
- 29 .comment      0000001a  00000000  00000000  0013c4ae  2**0  CONTENTS, READONLY
- 30 .Pulp_Chip.Info 0000004e  00000000  00000000  0013c4c8  2**0  CONTENTS, READONLY
+ 20 .debug_frame  0000428c  00000000  00000000  00011020  2**2  CONTENTS, READONLY, DEBUGGING
+ 21 .debug_info   00059e40  00000000  00000000  000152ac  2**0  CONTENTS, READONLY, DEBUGGING
+ 22 .debug_abbrev 0000a1a6  00000000  00000000  0006f0ec  2**0  CONTENTS, READONLY, DEBUGGING
+ 23 .debug_loc    00017fd5  00000000  00000000  00079292  2**0  CONTENTS, READONLY, DEBUGGING
+ 24 .debug_aranges 00001120  00000000  00000000  00091268  2**3  CONTENTS, READONLY, DEBUGGING
+ 25 .debug_ranges 000035f0  00000000  00000000  00092388  2**3  CONTENTS, READONLY, DEBUGGING
+ 26 .debug_macro  0000dda8  00000000  00000000  00095978  2**0  CONTENTS, READONLY, DEBUGGING
+ 27 .debug_line   0002118b  00000000  00000000  000a3720  2**0  CONTENTS, READONLY, DEBUGGING
+ 28 .debug_str    00077eff  00000000  00000000  000c48ab  2**0  CONTENTS, READONLY, DEBUGGING
+ 29 .comment      0000001a  00000000  00000000  0013c7aa  2**0  CONTENTS, READONLY
+ 30 .Pulp_Chip.Info 0000004e  00000000  00000000  0013c7c4  2**0  CONTENTS, READONLY
 SYMBOL TABLE:
 00000004 l    d  .data_tiny_fc	00000000 .data_tiny_fc
 1b000398 l    d  .stack	00000000 .stack
@@ -3768,7 +3768,7 @@ static inline struct pi_cluster_task *pi_cluster_task(struct pi_cluster_task *ta
 1c00193e:	b7e5                	j	1c001926 <main+0x50>
 
 1c001940 <cluster_fn>:
-  //  put here the multicore funcion definitions
+  void backpropagation_Par(uint8_t * X_in, float * Y_out, float * Y_ex, float * W_wg, float * B_bs, uint32_t in, uint32_t out, float lr);
 #endif
 
 
@@ -4266,11 +4266,6 @@ void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, ui
 1c001ccc:	86ce                	mv	a3,s3
 1c001cce:	88850513          	addi	a0,a0,-1912 # 1c005888 <__clz_tab+0x20c>
 1c001cd2:	01f020ef          	jal	ra,1c0044f0 <printf>
-        Y_out[j] = acc + B_bs[j];
-
-        printf("%f\n", Y_out[j]);
-    }
-    */
 }
 1c001cd6:	40f6                	lw	ra,92(sp)
 1c001cd8:	4466                	lw	s0,88(sp)
@@ -4352,8 +4347,6 @@ void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, ui
 1c001d5e:	0ff47413          	andi	s0,s0,255
 1c001d62:	8522                	mv	a0,s0
 1c001d64:	fc9468e3          	bltu	s0,s1,1c001d34 <validateLayer+0x32>
-        else{
-            //printf("input %d is %f, reference is %f, therefore they are EQUAL\n", j, Y_out[j], reference[j]);
         }
     }
 
