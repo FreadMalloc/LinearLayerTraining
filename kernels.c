@@ -4,7 +4,32 @@
 
 void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, uint32_t in, uint32_t out){
     uint32_t i, j;
-    float a, b;
+    float a, b, c, d, common;
+
+    float acc0 = 0.0, acc1 = 0.0, acc2 = 0.0, acc3 = 0.0;
+    
+    for(i=0; i< in; i++){       // 1920 times
+        common = (float)X_in[i];
+
+        a = W_wg[i];
+        b = W_wg[in + i];
+        c = W_wg[2*in + i];
+        d = W_wg[3*in + i];
+
+        acc0 += a * common;
+        acc1 += b * common;
+        acc2 += c * common;
+        acc3 += d * common;
+    }
+
+    Y_out[0] = acc0 + B_bs[0];
+    Y_out[1] = acc1 + B_bs[1];
+    Y_out[2] = acc2 + B_bs[2];
+    Y_out[3] = acc3 + B_bs[3];
+    
+    printf("%f\n%f\n%f\n%f\n", Y_out[0], Y_out[1], Y_out[2], Y_out[3]);
+
+    /*
     for(j=0; j < out; j++){         // MAX 4 CORES
         float acc = 0;
         for(i=0; i< in; i++){       // 1920 times
@@ -16,6 +41,7 @@ void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, ui
 
         printf("%f\n", Y_out[j]);
     }
+    */
 }
 
 void validateLayer(float * Y_out, float *reference, uint32_t out)
@@ -61,27 +87,22 @@ void backpropagation(uint8_t * X_in,
                         float lr){
     uint32_t i, j, index;
     float gradient[out];
-    //printf("%d,%d\n",in,out);
 
     // BIASES FIRST
     for(j=0; j< out; j++){
         gradient[j] = Y_out[j]-Y_ex[j];
-        //float a = B_bs[j];   //to print
         B_bs[j] = B_bs[j] - lr * gradient[j];       // new bias = old - learning rate * (output - ideal output)
-        //printf("bias %d was %f, since his y was off by %f, now it is %f\n", j, a, gradient[j], B_bs[j]);
     }
 
     // NOW WEIGHTS
-    for(i=0; i< in; i++){
-        for(j=0; j< out; j++){
-            index = j*in + i;
-            //float a = W_wg[index];   //to print
-            
-            W_wg[index] = W_wg[index] - lr * gradient[j] * (float)X_in[i];    // new weight = old - learning rate * (output - ideal output) * input
-            
-            //printf("weight %d was %f, since his y was off by %f and its input is %f, it has changed of %f\n", index, a, gradient[j], (float)X_in[i], W_wg[index]-a);
-            //printf("(%d,%d), absolute: %d\n", j, i, index);
-        }
+    for(i=0; i< in; i++){       //loop rolled on j
+
+        float common_therm = X_in[i];
+        //index is j*in + i
+        W_wg[i]         = W_wg[i]        - lr * gradient[0] * common_therm;      // new weight = old - learning rate * (output - ideal output) * input
+        W_wg[in + i]    = W_wg[in + i]   - lr * gradient[1] * common_therm;
+        W_wg[2*in + i]  = W_wg[2*in + i] - lr * gradient[2] * common_therm;
+        W_wg[3*in + i]  = W_wg[3*in + i] - lr * gradient[3] * common_therm;
     }
 
 }
