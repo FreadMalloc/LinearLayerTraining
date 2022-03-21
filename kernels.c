@@ -93,12 +93,19 @@ void backpropagation(uint8_t * X_in,
 ///////////////////////////////////////////// MULTI-CORE //////////////////////////////////////////////////
 
 void forewardProp_Par(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, uint32_t in, uint32_t out){
-    uint32_t i, j;
     float a, b, c, d, common;
 
     float acc0 = 0.0, acc1 = 0.0, acc2 = 0.0, acc3 = 0.0;
     
-    for(i=0; i< in; i++){       // 1920 times
+    uint32_t i, core_id, i_start, i_end, i_block, i_chunk;  // for parallelization
+
+    core_id = pi_core_id();
+
+    i_chunk = (in + NUM_CORES - 1) / NUM_CORES;       // i_chunk = (n / NUM_CORES) rounded towards infinity
+    i_start = core_id * i_chunk;
+    i_end = i_start + i_chunk < in? i_start + i_chunk : in;   // make sure we don't fall out of bounds (n)
+    
+    for(i = i_start ; i < i_end; i++){
         common = (float)X_in[i];
 
         a = W_wg[i];
@@ -112,12 +119,16 @@ void forewardProp_Par(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs
         acc3 += d * common;
     }
 
-    Y_out[0] = acc0 + B_bs[0];
-    Y_out[1] = acc1 + B_bs[1];
-    Y_out[2] = acc2 + B_bs[2];
-    Y_out[3] = acc3 + B_bs[3];
-    
-    printf("%f\n%f\n%f\n%f\n", Y_out[0], Y_out[1], Y_out[2], Y_out[3]);
+    pi_cl_team_barrier();
+
+    if(core_id == 0){
+        Y_out[0] = acc0 + B_bs[0];
+        Y_out[1] = acc1 + B_bs[1];
+        Y_out[2] = acc2 + B_bs[2];
+        Y_out[3] = acc3 + B_bs[3];
+        
+        printf("%f\n%f\n%f\n%f\n", Y_out[0], Y_out[1], Y_out[2], Y_out[3]);
+    }
 }
 
 void backpropagation_Par(uint8_t * X_in,
@@ -149,3 +160,22 @@ void backpropagation_Par(uint8_t * X_in,
     }
 
 }
+
+/* BALANCED PARALLELIZATION TEMPLATE
+    uint32_t i, core_id, i_start, i_end, i_block, i_chunk;
+
+    core_id = pi_core_id();
+
+    i_chunk = (n + NUM_CORES - 1) / NUM_CORES;       // i_chunk = (n / NUM_CORES) rounded towards infinity
+    i_start = core_id * i_chunk;
+    i_end = i_start + i_chunk < n? i_start + i_chunk : n;   // make sure we don't fall out of bounds (n)
+
+    for (i = i_start ; i < i_end; i++) {
+        int32_t a = pSrcA[i];
+        int32_t b = pSrcB[i];
+        pDstC[i] = a + b;
+    }
+
+    // ADD A BARRIER
+    pi_cl_team_barrier();
+*/

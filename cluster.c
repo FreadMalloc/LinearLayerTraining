@@ -8,13 +8,13 @@
 
 
 // APPLICATION DATA
-PI_L2 uint8_t X_input[IN] = INPUTS_UINT8;
-PI_L2 float Y_output[OUT];
-PI_L2 float Verification_Vec[OUT] = VERIFICATION_FLOAT32;
-PI_L2 float W_weight[WH] = WEIGHTS_FLOAT32;
-PI_L2 float B_bias[OUT] = BIASES_FLOAT32;
-float Y_expected[OUT] = {0.0, 1.0, 0.0, 0.0};
-float learningRate = 0.00000001;
+PI_L1 uint8_t X_input[IN] = INPUTS_UINT8;
+PI_L1 float Y_output[OUT];
+PI_L1 float Verification_Vec[OUT] = VERIFICATION_FLOAT32;
+PI_L1 float W_weight[WH] = WEIGHTS_FLOAT32;
+PI_L1 float B_bias[OUT] = BIASES_FLOAT32;
+PI_L1 float Y_expected[OUT] = {0.0, 1.0, 0.0, 0.0};
+PI_L1 float learningRate = 0.00000001;
 
 #if NUM_CORES == 1
   void forewardProp(uint8_t * X_in, float * Y_out , float * W_wg, float * B_bs, uint32_t in, uint32_t out);
@@ -28,8 +28,6 @@ float learningRate = 0.00000001;
   void backpropagation_Par(uint8_t * X_in, float * Y_out, float * Y_ex, float * W_wg, float * B_bs, uint32_t in, uint32_t out, float lr);
 #endif
 
-
-
 void cluster_fn() {
 
   // init performance counters
@@ -40,16 +38,15 @@ void cluster_fn() {
 
   // start measuring
   START_STATS();
-
   // workload
   #if NUM_CORES == 1
-
+    printf("single core\n");
     float cost = 0.0, new_cost = 0.0;
     
     forewardProp(X_input, Y_output, W_weight, B_bias, IN, OUT);
     validateLayer(Y_output, Verification_Vec, OUT);
     
-    for(int epochs = 0; epochs<2; epochs++){
+    for(int epochs = 0; epochs<1; epochs++){
       cost = cost_func(Y_output, Y_expected, OUT);
       printf("cost: %f\n", cost);
       backpropagation(X_input, Y_output, Y_expected, W_weight, B_bias, IN, OUT, learningRate);
@@ -64,13 +61,16 @@ void cluster_fn() {
     float cost = 0.0, new_cost = 0.0;
     
     forewardProp_Par(X_input, Y_output, W_weight, B_bias, IN, OUT);
-    validateLayer(Y_output, Verification_Vec, OUT);
-    
+    pi_cl_team_barrier();
+    if(pi_core_id() == 0) {
+      validateLayer(Y_output, Verification_Vec, OUT);
+    }
+
     for(int epochs = 0; epochs<2; epochs++){
       cost = cost_func(Y_output, Y_expected, OUT);
       printf("cost: %f\n", cost);
       backpropagation_Par(X_input, Y_output, Y_expected, W_weight, B_bias, IN, OUT, learningRate);
-      forewardProp(X_input, Y_output, W_weight, B_bias, IN, OUT);
+      forewardProp_Par(X_input, Y_output, W_weight, B_bias, IN, OUT);
       new_cost = cost_func(Y_output, Y_expected, OUT);
       
       printf("new cost: %f\n     change: %f\n", new_cost, (cost-new_cost));

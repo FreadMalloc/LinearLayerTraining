@@ -1,3 +1,4 @@
+from operator import truth
 from random import randrange
 import sys
 import numpy as np
@@ -89,8 +90,9 @@ inputs = nn.Parameter(inputs)
 
 outputs = layer(inputs)     #sent to .h for verification in the cluster
 
-outputs = outputs.detach().numpy()
-for idx, b in enumerate(outputs):   #saving the validation vector
+
+outputs_numpy = outputs.detach().numpy()
+for idx, b in enumerate(outputs_numpy):   #saving the validation vector
     VERIFICATION_string += str(b)
     
     if idx != J_out-1:
@@ -98,6 +100,28 @@ for idx, b in enumerate(outputs):   #saving the validation vector
     else:
         VERIFICATION_string += "}\n"
 
+
+############################ VALIDATING THE BACKPROPAGATION ###########################
+
+loss_function = torch.nn.MSELoss()
+learning_rate = 0.00000001
+true_model = torch.FloatTensor([0.0, 1.0, 0.0, 0.0])
+
+loss = loss_function(outputs, true_model)
+print(layer(inputs))
+print(loss)
+
+layer.zero_grad()
+
+loss.backward()
+
+with torch.no_grad():
+    for param in layer.parameters():
+        param -= learning_rate * param.grad
+
+loss = loss_function(layer(inputs), true_model)
+print(layer(inputs))
+print(loss)
 
 #printing everything on .h file
 txt_file = open(fileName, 'w')

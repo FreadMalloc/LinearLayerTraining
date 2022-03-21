@@ -40,5 +40,4 @@ int main()
   pi_cluster_close(&cluster_dev);
 
   return 0;
- 
 }
